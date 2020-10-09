@@ -1,4 +1,4 @@
-package com.demo.service;
+package com.javashitang.service;
 
 
 public class HelloServiceImpl implements HelloService {

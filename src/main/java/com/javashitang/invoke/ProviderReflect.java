@@ -1,4 +1,4 @@
-package com.demo.invoke;
+package com.javashitang.invoke;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -9,7 +9,7 @@ public class ProviderReflect {
 
     private static final ExecutorService executorService = Executors.newCachedThreadPool();
 
-    public static void provider(final Object service, int port) throws Exception {
+    public static void invoke(final Object service, int port) throws Exception {
 
         ServerSocket serverSocket = new ServerSocket(port);
 
