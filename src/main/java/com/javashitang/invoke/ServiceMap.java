@@ -11,8 +11,8 @@ public class ServiceMap {
 
     private static Map<String, Object> serviceMap = new HashMap<>();
 
-    public static void putService(String serviceKey, Class<?> clazz) {
-        serviceMap.put(serviceKey, clazz);
+    public static void putService(String serviceKey, Object service) {
+        serviceMap.put(serviceKey, service);
     }
 
     public static Object getService(String serviceKey) {

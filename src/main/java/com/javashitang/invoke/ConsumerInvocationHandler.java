@@ -28,7 +28,7 @@ public class ConsumerInvocationHandler implements InvocationHandler {
                     .interfaceName(method.getDeclaringClass().getName())
                     .methodName(method.getName())
                     .paramTypes(method.getParameterTypes())
-                    .parameters(method.getParameters()).build();
+                    .parameters(args).build();
             outputStream.writeObject(rpcRequest);
             Object result = inputStream.readObject();
             return result;

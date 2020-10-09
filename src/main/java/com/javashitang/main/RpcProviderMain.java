@@ -18,7 +18,7 @@ public class RpcProviderMain {
 
         HelloService helloService = new HelloServiceImpl();
         // 将需要暴露的接口放到serviceMap中
-        ServiceMap.putService(helloService.getClass().getName(), helloService.getClass());
+        ServiceMap.putService(HelloService.class.getName(), helloService);
 
         ServerSocket serverSocket = new ServerSocket(8080);
 
