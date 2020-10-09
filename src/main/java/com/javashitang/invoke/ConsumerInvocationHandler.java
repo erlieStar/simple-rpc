@@ -13,9 +13,9 @@ public class ConsumerInvocationHandler implements InvocationHandler {
     private String host;
     private Integer port;
 
-    public ConsumerInvocationHandler(String host, Integer prot) {
+    public ConsumerInvocationHandler(String host, Integer port) {
         this.host = host;
-        this.port = prot;
+        this.port = port;
     }
 
     @Override
@@ -24,8 +24,12 @@ public class ConsumerInvocationHandler implements InvocationHandler {
         try (Socket socket = new Socket(host, port);
              ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())) {
-            outputStream.writeUTF(method.getName());
-            outputStream.writeObject(args);
+            RpcRequest rpcRequest = RpcRequest.builder()
+                    .interfaceName(method.getDeclaringClass().getName())
+                    .methodName(method.getName())
+                    .paramTypes(method.getParameterTypes())
+                    .parameters(method.getParameters()).build();
+            outputStream.writeObject(rpcRequest);
             Object result = inputStream.readObject();
             return result;
         } catch (Exception e) {
