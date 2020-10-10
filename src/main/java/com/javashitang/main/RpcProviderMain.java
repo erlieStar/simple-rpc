@@ -4,6 +4,8 @@ import com.javashitang.invoke.RequestHandler;
 import com.javashitang.invoke.ServiceMap;
 import com.javashitang.service.HelloService;
 import com.javashitang.service.HelloServiceImpl;
+import com.javashitang.service.UpperCaseService;
+import com.javashitang.service.UpperCaseServiceImpl;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -17,8 +19,10 @@ public class RpcProviderMain {
     public static void main(String[] args) throws Exception {
 
         HelloService helloService = new HelloServiceImpl();
+        UpperCaseService upperCaseService = new UpperCaseServiceImpl();
         // 将需要暴露的接口放到serviceMap中
         ServiceMap.putService(HelloService.class.getName(), helloService);
+        ServiceMap.putService(UpperCaseService.class.getName(), upperCaseService);
 
         ServerSocket serverSocket = new ServerSocket(8080);
 
