@@ -21,7 +21,7 @@ public class RequestHandler implements Runnable {
         try (ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
              ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())) {
             RpcRequest rpcRequest = (RpcRequest) inputStream.readObject();
-            Object service = ServiceMap.getService(rpcRequest.getInterfaceName());
+            Object service = ServiceMap.lookupService(rpcRequest.getInterfaceName());
             Method method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParamTypes());
             Object result = method.invoke(service, rpcRequest.getParameters());
             outputStream.writeObject(result);

@@ -21,8 +21,8 @@ public class RpcProviderMain {
         HelloService helloService = new HelloServiceImpl();
         UpperCaseService upperCaseService = new UpperCaseServiceImpl();
         // 将需要暴露的接口放到serviceMap中
-        ServiceMap.putService(HelloService.class.getName(), helloService);
-        ServiceMap.putService(UpperCaseService.class.getName(), upperCaseService);
+        ServiceMap.registerService(HelloService.class.getName(), helloService);
+        ServiceMap.registerService(UpperCaseService.class.getName(), upperCaseService);
 
         ServerSocket serverSocket = new ServerSocket(8080);
 

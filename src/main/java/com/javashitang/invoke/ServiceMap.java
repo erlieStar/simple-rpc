@@ -11,11 +11,11 @@ public class ServiceMap {
 
     private static Map<String, Object> serviceMap = new HashMap<>();
 
-    public static void putService(String serviceKey, Object service) {
+    public static void registerService(String serviceKey, Object service) {
         serviceMap.put(serviceKey, service);
     }
 
-    public static Object getService(String serviceKey) {
+    public static Object lookupService(String serviceKey) {
         return serviceMap.get(serviceKey);
     }
 }
