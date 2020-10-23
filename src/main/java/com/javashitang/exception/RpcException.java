@@ -6,8 +6,6 @@ package com.javashitang.exception;
  */
 public class RpcException extends RuntimeException {
 
-    private int code;
-
     public RpcException(String message) {
         super(message);
     }

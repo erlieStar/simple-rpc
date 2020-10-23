@@ -15,10 +15,12 @@ public class CuratorZkClient {
     public static CuratorZkClient getInstance() {
         if (curatorZkClient == null) {
             synchronized (CuratorZkClient.class) {
-
+                if (curatorZkClient != null) {
+                    curatorZkClient = new CuratorZkClient();
+                }
             }
         }
-        return null;
+        return curatorZkClient;
     }
 
 }
