@@ -5,15 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.javashitang</groupId>
-  <artifactId>simple-rpc</artifactId>
+  <artifactId>example-server</artifactId>
   <packaging>pom</packaging>
   <version>1.0</version>
-
-  <modules>
-    <module>rpc-framework</module>
-    <module>example-client</module>
-    <module>example-server</module>
-    <module>example-api</module>
-  </modules>
 
 </project>
