@@ -15,6 +15,11 @@
       <artifactId>example-api</artifactId>
       <version>1.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.javashitang</groupId>
+      <artifactId>rpc-framework</artifactId>
+      <version>1.0</version>
+    </dependency>
   </dependencies>
 
 </project>

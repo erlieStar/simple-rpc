@@ -14,7 +14,7 @@ import java.util.concurrent.CompletableFuture;
  * @author lilimin
  * @since 2020-09-23
  */
-public class RpcClientProxy implements InvocationHandler {
+public class ConsumerInvocationHandler implements InvocationHandler {
 
     private Transporter transporter = new NettyTransport();
 

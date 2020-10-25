@@ -1,10 +1,12 @@
 package com.javashitang;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.javashitang.proxy.ConsumerProxy;
 
 public class RpcClient {
 
     public static void main( String[] args ) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(RpcClient.class);
+        StudentService studentService = ConsumerProxy.getProxy(StudentService.class);
+        System.out.println(studentService.getStudentInfo(10));
     }
 }

@@ -24,7 +24,7 @@ public class NettyServer {
 
     public static final int port = 8080;
 
-    public void open() {
+    public void start() {
 
         Serializer serializer = new KryoSerializer();
         EventLoopGroup bossGroup = new NioEventLoopGroup();

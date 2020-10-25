@@ -31,6 +31,10 @@ public class CuratorZkUtil {
 
     private CuratorZkUtil() {}
 
+    public static void setZkAddress(String address) {
+        defaultZkAddress = address;
+    }
+
     public static CuratorFramework getZkClient() {
         // 重试3次，每次间隔1000ms
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);

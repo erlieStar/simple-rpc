@@ -18,16 +18,14 @@ public class ServiceMap {
     private static Map<String, Object> serviceMap = Maps.newHashMap();
     private static final RegistryService registryService = new ZookeeperRegistryService();
 
-    public static void registryService(Object object) {
+    public static void registryService(String serviceKey, Object object) {
         try {
-            Class<?> serviceRelatedInterface = object.getClass().getInterfaces()[0];
-            String serviceKey = serviceRelatedInterface.getCanonicalName();
             serviceMap.put(serviceKey, object);
             String host = InetAddress.getLocalHost().getHostAddress();
             InetSocketAddress address = new InetSocketAddress(host, NettyServer.port);
             registryService.register(serviceKey, address);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
