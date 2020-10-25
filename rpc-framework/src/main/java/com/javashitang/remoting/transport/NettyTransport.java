@@ -27,7 +27,7 @@ public class NettyTransport implements Transporter {
         String serviceName = request.getInterfaceName();
         InetSocketAddress address = registryService.lookup(serviceName);
         Channel channel = ChannelMap.getChannel(address);
-        if (channel != null || !channel.isActive()) {
+        if (channel == null || !channel.isActive()) {
             throw new IllegalStateException();
         }
         CompletableFuture<RpcResponse> requestFuture = new CompletableFuture();

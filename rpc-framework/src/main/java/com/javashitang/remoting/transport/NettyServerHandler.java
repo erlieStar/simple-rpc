@@ -25,6 +25,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
     }
 
     public RpcResponse invokeMethod(RpcRequest request) {
+        log.info("invokeMethod param request: {}", request.toString());
         Object result;
         try {
             StringBuffer sb = new StringBuffer();

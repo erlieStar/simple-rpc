@@ -26,7 +26,7 @@ public class NettyClient {
     private NioEventLoopGroup nioEventLoopGroup = new NioEventLoopGroup();
     private Bootstrap bootstrap;
 
-    public void NettyClient() {
+    public NettyClient() {
         Serializer serializer = new KryoSerializer();
         bootstrap = new Bootstrap();
         bootstrap.group(nioEventLoopGroup)

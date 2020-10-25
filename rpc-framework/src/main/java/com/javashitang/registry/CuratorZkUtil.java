@@ -40,31 +40,32 @@ public class CuratorZkUtil {
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
         if (zkClient == null) {
             synchronized (CuratorZkUtil.class) {
-                if (zkClient != null) {
+                if (zkClient == null) {
                     zkClient = CuratorFrameworkFactory.newClient(defaultZkAddress, retryPolicy);
                 }
             }
         }
+        zkClient.start();
         return zkClient;
     }
 
     // 创建持久节点
     public static void createPersistentMode(CuratorFramework zkClient, String path) {
         try {
-            path = ROOT_PATH + path;
+            path = new StringBuilder(ROOT_PATH).append("/").append(path).toString();
             if (zkClient.checkExists().forPath(path) != null) {
                 log.info("path {} is already exists", path);
             } else {
                 zkClient.create().creatingParentContainersIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path);
             }
         } catch (Exception e) {
-            throw new RpcException(e.getMessage(), e.getCause());
+            log.error("createPersistentMode error", e);
         }
     }
 
     // 获取子节点
     public static List<String> getChildrenNodes(CuratorFramework zkClient, String path) {
-        path = ROOT_PATH + path;
+        path = new StringBuilder(ROOT_PATH).append("/").append(path).toString();
         if (serviceMap.containsKey(path)) {
             return (List<String>) serviceMap.get(path);
         }
@@ -103,7 +104,7 @@ public class CuratorZkUtil {
         try {
             cache.start();
         } catch (Exception e) {
-            throw new RpcException(e.getMessage(), e.getCause());
+            log.error("registryWatcher error", e);
         }
     }
 
