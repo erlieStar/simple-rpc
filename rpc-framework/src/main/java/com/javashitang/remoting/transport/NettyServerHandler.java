@@ -28,8 +28,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
         Object result;
         try {
             StringBuffer sb = new StringBuffer();
-            String serviceKey = sb.append(request.getInterfaceName()).append(":").append(request.getMethodName()).append(":")
-                    .append(request.getVersion()).toString();
+            String serviceKey = sb.append(request.getInterfaceName()).append(":").append(request.getMethodName()).append(":").toString();
             Object service = ServiceMap.getService(serviceKey);
             Method method = service.getClass().getMethod(request.getMethodName(), request.getParamTypes());
             result = method.invoke(service, request.getParameters());

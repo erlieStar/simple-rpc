@@ -27,7 +27,7 @@ public class CuratorZkUtil {
     private static final String ROOT_PATH = "/simple-dubbo";
     // 类似 Map<String, List<String>>
     private static final Multimap<String, String> serviceMap = ArrayListMultimap.create();
-    private static String defaultZkAddress = "127.0.0.1:2181";
+    private static String defaultZkAddress = "myhost:2181";
 
     private CuratorZkUtil() {}
 

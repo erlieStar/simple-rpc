@@ -16,8 +16,4 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Inherited
 public @interface RpcService {
-
-    String version() default "";
-
-    String group() default "";
 }
