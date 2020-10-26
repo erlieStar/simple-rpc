@@ -7,6 +7,8 @@ public class RpcClient {
 
     public static void main( String[] args ) {
         StudentService studentService = ConsumerProxy.getProxy(StudentService.class);
-        System.out.println(studentService.getStudentInfo(10));
+        for (int i = 0; i < 5; i++) {
+            System.out.println(studentService.getStudentInfo(10));
+        }
     }
 }

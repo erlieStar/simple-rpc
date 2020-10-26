@@ -9,12 +9,15 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author lilimin
  * @since 2020-09-23
  */
 public class ConsumerInvocationHandler implements InvocationHandler {
+
+    public static final AtomicLong INVOKE_ID = new AtomicLong(0);
 
     private Transporter transporter = new NettyTransport();
 
@@ -25,7 +28,7 @@ public class ConsumerInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         RpcRequest rpcRequest = RpcRequest.builder()
-                .requestId(RpcRequest.INVOKE_ID.getAndIncrement())
+                .requestId(INVOKE_ID.getAndIncrement())
                 .interfaceName(method.getDeclaringClass().getName())
                 .methodName(method.getName())
                 .paramTypes(method.getParameterTypes())

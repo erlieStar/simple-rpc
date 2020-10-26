@@ -1,6 +1,7 @@
 package com.javashitang.remoting.exchange;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -9,6 +10,7 @@ import java.io.Serializable;
  * @since 2020-09-23
  */
 @Data
+@NoArgsConstructor
 public class RpcResponse implements Serializable {
 
     private long requestId;

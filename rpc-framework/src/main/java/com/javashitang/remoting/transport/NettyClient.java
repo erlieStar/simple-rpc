@@ -36,8 +36,8 @@ public class NettyClient {
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
                 ChannelPipeline pipeline = ch.pipeline();
-                pipeline.addLast(new KryoDecoder(serializer, RpcRequest.class));
-                pipeline.addLast(new KryoEncoder(serializer, RpcResponse.class));
+                pipeline.addLast(new KryoDecoder(serializer, RpcResponse.class));
+                pipeline.addLast(new KryoEncoder(serializer, RpcRequest.class));
                 pipeline.addLast(new NettyClientHandler());
             }
         });

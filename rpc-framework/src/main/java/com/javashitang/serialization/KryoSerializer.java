@@ -4,6 +4,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import com.javashitang.exception.SerializationException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,6 +13,7 @@ import java.io.ByteArrayOutputStream;
  * @author lilimin
  * @since 2020-09-21
  */
+@Slf4j
 public class KryoSerializer implements Serializer {
 
     /**
@@ -32,6 +34,7 @@ public class KryoSerializer implements Serializer {
             kryoThreadLocal.remove();
             return output.toBytes();
         } catch (Exception e) {
+            log.error("serialize error", e);
             throw new SerializationException("serialize failed");
         }
     }
@@ -44,6 +47,7 @@ public class KryoSerializer implements Serializer {
             kryoThreadLocal.remove();
             return kryo.readObject(input, clazz);
         } catch (Exception e) {
+            log.error("deserialize error", e);
             throw new SerializationException("deserialize failed");
         }
     }

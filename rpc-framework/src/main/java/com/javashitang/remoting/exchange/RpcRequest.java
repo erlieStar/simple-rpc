@@ -1,7 +1,10 @@
 package com.javashitang.remoting.exchange;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.checkerframework.checker.units.qual.A;
 
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicLong;
@@ -12,9 +15,10 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RpcRequest implements Serializable {
 
-    public static final AtomicLong INVOKE_ID = new AtomicLong(0);
     private long requestId;
     private String interfaceName;
     private String methodName;
