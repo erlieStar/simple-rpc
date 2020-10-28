@@ -9,6 +9,7 @@ public class RpcServer {
 
     public static void main( String[] args ) {
         StudentService studentService = new StudentServiceImpl();
+        // 向注册中心注册
         ServiceMap.registryService(StudentService.class.getName(), studentService);
         NettyServer nettyServer = new NettyServer();
         nettyServer.start();

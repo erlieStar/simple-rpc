@@ -2,7 +2,7 @@ package com.javashitang.remoting.transport;
 
 import com.javashitang.registry.RegistryService;
 import com.javashitang.registry.ZookeeperRegistryService;
-import com.javashitang.remoting.exchange.ReponseFutureMap;
+import com.javashitang.remoting.exchange.ResponseFutureMap;
 import com.javashitang.remoting.exchange.RpcRequest;
 import com.javashitang.remoting.exchange.RpcResponse;
 import com.javashitang.service.ChannelMap;
@@ -31,7 +31,7 @@ public class NettyTransport implements Transporter {
             throw new IllegalStateException();
         }
         CompletableFuture<RpcResponse> requestFuture = new CompletableFuture();
-        ReponseFutureMap.put(request.getRequestId(), requestFuture);
+        ResponseFutureMap.put(request.getRequestId(), requestFuture);
         channel.writeAndFlush(request).addListener((ChannelFutureListener) future -> {
             if (future.isSuccess()) {
                 log.info("send msg: {} success", request);

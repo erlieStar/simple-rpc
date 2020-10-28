@@ -29,12 +29,12 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
         log.info("invokeMethod param request: {}", request.toString());
         Object result;
         try {
-            StringBuffer sb = new StringBuffer();
-            String serviceKey = sb.append(request.getInterfaceName()).append(":").append(request.getMethodName()).append(":").toString();
+            String serviceKey = request.getInterfaceName();
             Object service = ServiceMap.getService(serviceKey);
             Method method = service.getClass().getMethod(request.getMethodName(), request.getParamTypes());
             result = method.invoke(service, request.getParameters());
         } catch (Exception e) {
+            log.error("invokeMethod error", e);
             throw new RpcException("invoke failed");
         }
         return RpcResponse.success(request.getRequestId(), result);

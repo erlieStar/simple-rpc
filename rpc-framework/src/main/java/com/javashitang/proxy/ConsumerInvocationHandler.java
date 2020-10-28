@@ -32,7 +32,7 @@ public class ConsumerInvocationHandler implements InvocationHandler {
                 .interfaceName(method.getDeclaringClass().getName())
                 .methodName(method.getName())
                 .paramTypes(method.getParameterTypes())
-                .parameters(method.getParameters())
+                .parameters(args)
                 .build();
         CompletableFuture<RpcResponse> future = (CompletableFuture<RpcResponse>) transporter.sendRequest(rpcRequest);
         RpcResponse response = future.get();

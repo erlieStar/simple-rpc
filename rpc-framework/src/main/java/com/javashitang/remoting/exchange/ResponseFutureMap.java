@@ -4,13 +4,12 @@ import com.google.common.collect.Maps;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author lilimin
  * @since 2020-09-24
  */
-public class ReponseFutureMap {
+public class ResponseFutureMap {
 
     private static final Map<Long, CompletableFuture<RpcResponse>> FUTURES = Maps.newHashMap();
 
@@ -21,7 +20,7 @@ public class ReponseFutureMap {
     public static void received(RpcResponse response) {
         CompletableFuture future = FUTURES.remove(response.getRequestId());
         if (future != null) {
-            future.complete(response.getResult());
+            future.complete(response);
         }
     }
 }

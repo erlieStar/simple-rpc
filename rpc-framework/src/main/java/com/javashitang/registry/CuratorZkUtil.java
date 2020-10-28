@@ -24,7 +24,7 @@ import java.util.List;
 public class CuratorZkUtil {
 
     private static CuratorFramework zkClient;
-    private static final String ROOT_PATH = "/simple-dubbo";
+    private static final String ROOT_PATH = "/simple-rpc";
     // 类似 Map<String, List<String>>
     private static final Multimap<String, String> serviceMap = ArrayListMultimap.create();
     private static String defaultZkAddress = "myhost:2181";
@@ -42,10 +42,10 @@ public class CuratorZkUtil {
             synchronized (CuratorZkUtil.class) {
                 if (zkClient == null) {
                     zkClient = CuratorFrameworkFactory.newClient(defaultZkAddress, retryPolicy);
+                    zkClient.start();
                 }
             }
         }
-        zkClient.start();
         return zkClient;
     }
 
