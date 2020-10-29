@@ -1,7 +1,7 @@
 package com.javashitang.remoting.transport;
 
-import com.javashitang.codec.kryo.KryoDecoder;
-import com.javashitang.codec.kryo.KryoEncoder;
+import com.javashitang.codec.RpcMsgDecoder;
+import com.javashitang.codec.RpcMsgEncoder;
 import com.javashitang.remoting.exchange.RpcRequest;
 import com.javashitang.remoting.exchange.RpcResponse;
 import com.javashitang.serialization.KryoSerializer;
@@ -36,8 +36,8 @@ public class NettyClient {
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
                 ChannelPipeline pipeline = ch.pipeline();
-                pipeline.addLast(new KryoDecoder(serializer, RpcResponse.class));
-                pipeline.addLast(new KryoEncoder(serializer, RpcRequest.class));
+                pipeline.addLast(new RpcMsgDecoder(serializer, RpcResponse.class));
+                pipeline.addLast(new RpcMsgEncoder(serializer, RpcRequest.class));
                 pipeline.addLast(new NettyClientHandler());
             }
         });

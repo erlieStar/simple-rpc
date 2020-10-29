@@ -1,4 +1,4 @@
-package com.javashitang.codec.kryo;
+package com.javashitang.codec;
 
 import com.javashitang.serialization.Serializer;
 import io.netty.buffer.ByteBuf;
@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
  * @since 2020-09-23
  */
 @AllArgsConstructor
-public class KryoEncoder extends MessageToByteEncoder {
+public class RpcMsgEncoder extends MessageToByteEncoder {
 
     private Serializer serializer;
     private Class<?> clazz;

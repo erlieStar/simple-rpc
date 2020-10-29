@@ -1,4 +1,4 @@
-package com.javashitang.codec.kryo;
+package com.javashitang.codec;
 
 import com.javashitang.serialization.Serializer;
 import io.netty.buffer.ByteBuf;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Slf4j
 @AllArgsConstructor
-public class KryoDecoder extends ByteToMessageDecoder {
+public class RpcMsgDecoder extends ByteToMessageDecoder {
 
     private Serializer serializer;
     private Class<?> clazz;
