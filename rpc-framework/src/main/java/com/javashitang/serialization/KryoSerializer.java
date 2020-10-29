@@ -3,7 +3,7 @@ package com.javashitang.serialization;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import com.javashitang.exception.SerializationException;
+import com.javashitang.exception.RpcException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayInputStream;
@@ -35,7 +35,7 @@ public class KryoSerializer implements Serializer {
             return output.toBytes();
         } catch (Exception e) {
             log.error("serialize error", e);
-            throw new SerializationException("serialize failed");
+            throw new RpcException(RpcException.SERIALIZATION_EXCEPTION, e.getMessage(), e);
         }
     }
 
@@ -48,7 +48,7 @@ public class KryoSerializer implements Serializer {
             return kryo.readObject(input, clazz);
         } catch (Exception e) {
             log.error("deserialize error", e);
-            throw new SerializationException("deserialize failed");
+            throw new RpcException(RpcException.SERIALIZATION_EXCEPTION, e.getMessage(), e);
         }
     }
 }

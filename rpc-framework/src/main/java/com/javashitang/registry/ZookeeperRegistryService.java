@@ -9,6 +9,8 @@ import org.apache.curator.framework.CuratorFramework;
 import java.net.InetSocketAddress;
 import java.util.List;
 
+import static com.javashitang.registry.CuratorZkUtil.ROOT_PATH;
+
 /**
  * @author lilimin
  * @since 2020-09-24
@@ -20,15 +22,18 @@ public class ZookeeperRegistryService implements RegistryService {
     @Override
     public void register(String serviceName, InetSocketAddress inetSocketAddress) {
         CuratorFramework zkClient = CuratorZkUtil.getZkClient();
-        CuratorZkUtil.createPersistentMode(zkClient, serviceName + inetSocketAddress.toString());
+        String rootPath = new StringBuilder(ROOT_PATH).append("/").append(serviceName).toString();
+        CuratorZkUtil.create(zkClient, rootPath, true);
+        CuratorZkUtil.create(zkClient, rootPath + inetSocketAddress.toString(), false);
     }
 
     @Override
     public InetSocketAddress lookup(String serviceName) {
         CuratorFramework zkClient = CuratorZkUtil.getZkClient();
-        List<String> serviceUrls = CuratorZkUtil.getChildrenNodes(zkClient, serviceName);
+        String path = new StringBuilder(ROOT_PATH).append("/").append(serviceName).toString();
+        List<String> serviceUrls = CuratorZkUtil.getChildrenNodes(zkClient, path);
         if (CollectionUtils.isEmpty(serviceUrls)) {
-            throw new RpcException("");
+            throw new RpcException(RpcException.NO_PROVIDER_EXCEPTION, "no provider");
         }
         String targetServiceUrl = loadBalance.selectService(serviceUrls);
         String[] array = targetServiceUrl.split(":");

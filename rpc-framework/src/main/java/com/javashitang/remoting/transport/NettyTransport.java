@@ -37,6 +37,8 @@ public class NettyTransport implements Transporter {
                 log.info("send msg: {} success", request);
             } else {
                 log.error("send msg: {} failed", request);
+                future.channel().close();
+                requestFuture.completeExceptionally(future.cause());
             }
         });
         return requestFuture;

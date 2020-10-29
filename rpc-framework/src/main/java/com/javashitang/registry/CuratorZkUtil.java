@@ -23,8 +23,8 @@ import java.util.List;
 @Slf4j
 public class CuratorZkUtil {
 
+    public static final String ROOT_PATH = "/simple-rpc";
     private static CuratorFramework zkClient;
-    private static final String ROOT_PATH = "/simple-rpc";
     // 类似 Map<String, List<String>>
     private static final Multimap<String, String> serviceMap = ArrayListMultimap.create();
     private static String defaultZkAddress = "myhost:2181";
@@ -34,6 +34,7 @@ public class CuratorZkUtil {
     public static void setZkAddress(String address) {
         defaultZkAddress = address;
     }
+
 
     public static CuratorFramework getZkClient() {
         // 重试3次，每次间隔1000ms
@@ -49,33 +50,38 @@ public class CuratorZkUtil {
         return zkClient;
     }
 
-    // 创建持久节点
-    public static void createPersistentMode(CuratorFramework zkClient, String path) {
+    // 创建节点
+    public static void create(CuratorFramework zkClient, String path, boolean isPersistent) {
         try {
-            path = new StringBuilder(ROOT_PATH).append("/").append(path).toString();
             if (zkClient.checkExists().forPath(path) != null) {
                 log.info("path {} is already exists", path);
             } else {
-                zkClient.create().creatingParentContainersIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path);
+                if (isPersistent) {
+                    zkClient.create().creatingParentContainersIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path);
+                } else {
+                    zkClient.create().creatingParentContainersIfNeeded().withMode(CreateMode.EPHEMERAL).forPath(path);
+                }
             }
         } catch (Exception e) {
             log.error("createPersistentMode error", e);
+            throw new RpcException(e.getMessage(), e);
         }
     }
 
     // 获取子节点
     public static List<String> getChildrenNodes(CuratorFramework zkClient, String path) {
-        path = new StringBuilder(ROOT_PATH).append("/").append(path).toString();
+        log.info("getChildrenNodes param path: {}", path);
         if (serviceMap.containsKey(path)) {
+            log.info("hit cache");
             return (List<String>) serviceMap.get(path);
         }
         List<String> result = null;
         try {
             result = zkClient.getChildren().forPath(path);
-            serviceMap.putAll(path, result);
             registryWatcher(zkClient, path);
         } catch (Exception e) {
-            throw new RpcException(e.getMessage(), e.getCause());
+            log.error("getChildrenNodes error", e);
+            throw new RpcException(e.getMessage(), e);
         }
         return result;
     }
@@ -86,14 +92,16 @@ public class CuratorZkUtil {
         // 2.不能递归监听，即监听不到子节点下的子节点
         PathChildrenCache cache = new PathChildrenCache(zkClient, path, true);
         PathChildrenCacheListener listener = ((CuratorFramework client, PathChildrenCacheEvent event) -> {
-            ChildData data = event.getData();
-            String changePath = ROOT_PATH + data.getPath();
+            String changePath = event.getData().getPath();
+            changePath = changePath.substring(changePath.lastIndexOf("/") + 1);
             switch (event.getType()) {
                 case CHILD_ADDED:
                 case CHILD_UPDATED:
+                    log.info("child add or update");
                     serviceMap.put(path, changePath);
                     break;
                 case CHILD_REMOVED:
+                    log.info("child removed");
                     serviceMap.remove(path, changePath);
                     break;
                 default:
