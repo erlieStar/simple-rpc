@@ -2,7 +2,7 @@ package com.javashitang;
 
 import java.util.ServiceLoader;
 
-public class JavaSpiDemo {
+public class CarSpiDemo {
 
     public static void main(String[] args) {
         ServiceLoader<Car> carServiceLoader = ServiceLoader.load(Car.class);
