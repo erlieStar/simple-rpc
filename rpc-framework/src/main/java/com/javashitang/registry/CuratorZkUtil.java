@@ -3,6 +3,7 @@ package com.javashitang.registry;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.javashitang.exception.RpcException;
+import com.javashitang.util.PropertiesUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
@@ -27,7 +28,7 @@ public class CuratorZkUtil {
     private static CuratorFramework zkClient;
     // 类似 Map<String, List<String>>
     private static final Multimap<String, String> serviceMap = ArrayListMultimap.create();
-    private static String defaultZkAddress = "myhost:2181";
+    private static String defaultZkAddress = PropertiesUtil.getProperty("registry.address");
 
     private CuratorZkUtil() {}
 

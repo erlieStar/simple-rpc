@@ -18,7 +18,7 @@ import static com.javashitang.registry.CuratorZkUtil.ROOT_PATH;
  */
 public class ZookeeperRegistryService implements RegistryService {
 
-    private final LoadBalance loadBalance = new RandomLoadBalance();
+    private final LoadBalance loadBalance = SpiUtil.load(LoadBalance.class);
 
     @Override
     public void register(String serviceName, InetSocketAddress inetSocketAddress) {

@@ -1,11 +1,11 @@
 package com.javashitang.remoting.transport;
 
 import com.javashitang.registry.RegistryService;
-import com.javashitang.registry.ZookeeperRegistryService;
 import com.javashitang.remoting.exchange.ResponseFutureMap;
 import com.javashitang.remoting.exchange.RpcRequest;
 import com.javashitang.remoting.exchange.RpcResponse;
 import com.javashitang.service.ChannelMap;
+import com.javashitang.util.SpiUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import java.util.concurrent.CompletableFuture;
 @Slf4j
 public class NettyTransport implements Transporter {
 
-    private RegistryService registryService = new ZookeeperRegistryService();
+    private RegistryService registryService = SpiUtil.load(RegistryService.class);
 
     @Override
     public CompletableFuture<RpcResponse> sendRequest(RpcRequest request) {

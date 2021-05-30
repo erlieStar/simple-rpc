@@ -12,8 +12,7 @@ import java.util.stream.StreamSupport;
 public class SpiUtil {
 
     public synchronized static <S> S load(Class<S> service) {
-        return StreamSupport.
-                stream(ServiceLoader.load(service).spliterator(), false)
+        return StreamSupport.stream(ServiceLoader.load(service).spliterator(), false)
                 .findFirst().orElseThrow(ServiceLoadException::new);
     }
 }
