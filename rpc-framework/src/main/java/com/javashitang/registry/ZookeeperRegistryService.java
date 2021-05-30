@@ -3,6 +3,7 @@ package com.javashitang.registry;
 import com.javashitang.exception.RpcException;
 import com.javashitang.loadbalance.LoadBalance;
 import com.javashitang.loadbalance.RandomLoadBalance;
+import com.javashitang.util.SpiUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.curator.framework.CuratorFramework;
 
@@ -38,5 +39,10 @@ public class ZookeeperRegistryService implements RegistryService {
         String targetServiceUrl = loadBalance.selectService(serviceUrls);
         String[] array = targetServiceUrl.split(":");
         return new InetSocketAddress(array[0], Integer.valueOf(array[1]));
+    }
+
+    public static void main(String[] args) {
+        RegistryService service = SpiUtil.load(RegistryService.class);
+        System.out.println(service);
     }
 }
