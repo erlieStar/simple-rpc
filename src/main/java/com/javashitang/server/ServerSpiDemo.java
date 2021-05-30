@@ -1,4 +1,4 @@
-package com.javashitang;
+package com.javashitang.server;
 
 import java.util.ServiceLoader;
 import java.util.stream.StreamSupport;

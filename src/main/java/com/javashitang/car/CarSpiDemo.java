@@ -1,4 +1,6 @@
-package com.javashitang;
+package com.javashitang.car;
+
+import com.javashitang.car.Car;
 
 import java.util.ServiceLoader;
 

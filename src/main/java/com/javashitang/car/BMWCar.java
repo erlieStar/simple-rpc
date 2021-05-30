@@ -1,4 +1,4 @@
-package com.javashitang;
+package com.javashitang.car;
 
 public class BMWCar implements Car {
 

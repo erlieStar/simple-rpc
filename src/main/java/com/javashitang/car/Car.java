@@ -1,4 +1,4 @@
-package com.javashitang;
+package com.javashitang.car;
 
 public interface Car {
 

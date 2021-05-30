@@ -1,4 +1,4 @@
-package com.javashitang;
+package com.javashitang.server;
 
 
 /**
