@@ -6,6 +6,7 @@ import com.javashitang.remoting.exchange.RpcRequest;
 import com.javashitang.remoting.exchange.RpcResponse;
 import com.javashitang.serialization.KryoSerializer;
 import com.javashitang.serialization.Serializer;
+import com.javashitang.util.PropertiesUtil;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -22,7 +23,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  */
 public class NettyServer {
 
-    public static final int port = 8080;
+    public static final int port = PropertiesUtil.getInteger("server.port", 8080);
 
     public void start() {
 

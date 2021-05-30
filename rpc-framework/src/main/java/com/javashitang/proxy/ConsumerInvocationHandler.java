@@ -21,10 +21,6 @@ public class ConsumerInvocationHandler implements InvocationHandler {
 
     private Transporter transporter = new NettyTransport();
 
-    public <T> T getProxy(Class<T> clazz) {
-        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, this);
-    }
-
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         RpcRequest rpcRequest = RpcRequest.builder()

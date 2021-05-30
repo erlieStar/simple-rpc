@@ -35,7 +35,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
             result = method.invoke(service, request.getParameters());
         } catch (Exception e) {
             log.error("invokeMethod error", e);
-            throw new RpcException("invoke failed");
+            throw new RpcException(RpcException.BIZ_EXCEPTION, "invoke failed");
         }
         return RpcResponse.success(request.getRequestId(), result);
     }

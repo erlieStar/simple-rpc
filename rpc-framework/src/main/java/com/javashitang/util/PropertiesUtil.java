@@ -41,4 +41,19 @@ public class PropertiesUtil {
         }
         return value.trim();
     }
+
+    public static Integer getInteger(String key) {
+        String value = getProperty(key);
+        if (StringUtils.isBlank(value)) {
+            return null;
+        }
+        return Integer.valueOf(value);
+    }
+    public static Integer getInteger(String key, Integer defaultValue) {
+        String value = getProperty(key);
+        if (StringUtils.isBlank(value)) {
+            return defaultValue;
+        }
+        return Integer.valueOf(value);
+    }
 }
