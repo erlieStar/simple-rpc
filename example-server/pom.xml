@@ -6,7 +6,6 @@
 
   <groupId>com.javashitang</groupId>
   <artifactId>example-server</artifactId>
-  <packaging>pom</packaging>
   <version>1.0</version>
 
   <properties>

@@ -6,7 +6,6 @@
 
   <groupId>com.javashitang</groupId>
   <artifactId>rpc-framework</artifactId>
-  <packaging>pom</packaging>
   <version>1.0</version>
 
   <properties>
