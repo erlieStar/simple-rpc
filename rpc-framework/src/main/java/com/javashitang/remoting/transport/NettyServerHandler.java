@@ -5,6 +5,7 @@ import com.javashitang.remoting.exchange.RpcRequest;
 import com.javashitang.remoting.exchange.RpcResponse;
 import com.javashitang.service.ServiceMap;
 import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import java.lang.reflect.Method;
  * @since 2020-09-15
  */
 @Slf4j
+@ChannelHandler.Sharable
 public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
     @Override
