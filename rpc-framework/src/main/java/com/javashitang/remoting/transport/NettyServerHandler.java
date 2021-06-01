@@ -1,6 +1,5 @@
 package com.javashitang.remoting.transport;
 
-import com.javashitang.exception.RpcException;
 import com.javashitang.remoting.exchange.RpcRequest;
 import com.javashitang.remoting.exchange.RpcResponse;
 import com.javashitang.service.ServiceMap;
@@ -37,7 +36,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
             result = method.invoke(service, request.getParameters());
         } catch (Exception e) {
             log.error("invokeMethod error", e);
-            throw new RpcException(RpcException.BIZ_EXCEPTION, "invoke failed");
+            return RpcResponse.fail(request.getRequestId(), e.getCause().getMessage());
         }
         return RpcResponse.success(request.getRequestId(), result);
     }

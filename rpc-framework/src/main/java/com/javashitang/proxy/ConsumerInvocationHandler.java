@@ -1,5 +1,6 @@
 package com.javashitang.proxy;
 
+import com.javashitang.exception.RpcException;
 import com.javashitang.remoting.exchange.RpcRequest;
 import com.javashitang.remoting.exchange.RpcResponse;
 import com.javashitang.remoting.transport.NettyTransport;
@@ -32,6 +33,9 @@ public class ConsumerInvocationHandler implements InvocationHandler {
                 .build();
         CompletableFuture<RpcResponse> future = (CompletableFuture<RpcResponse>) transporter.sendRequest(rpcRequest);
         RpcResponse response = future.get();
+        if (!response.isSuccess()) {
+            throw new RpcException(RpcException.BIZ_EXCEPTION, response.getMessage());
+        }
         return response.getResult();
     }
 }
