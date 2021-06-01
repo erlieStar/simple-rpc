@@ -9,8 +9,9 @@ import com.javashitang.StudentService;
  */
 public class StudentServiceImpl implements StudentService {
 
+    @Override
     public Student getStudentInfo(Integer id) {
-        Student student = Student.builder().name("test").age(10).build();
+        Student student = Student.builder().id(id).name("test").age(10).build();
         return student;
     }
 }
