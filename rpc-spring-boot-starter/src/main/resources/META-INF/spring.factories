@@ -1,2 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.javashitang.autoconfigure.RpcAutoConfiguration
+
+org.springframework.boot.SpringApplicationRunListener=\
+com.javashitang.autoconfigure.RpcApplicationRunListener
