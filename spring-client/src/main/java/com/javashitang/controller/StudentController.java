@@ -4,15 +4,15 @@ import com.javashitang.Student;
 import com.javashitang.StudentService;
 import com.javashitang.annotation.RpcReference;
 import com.javashitang.tool.OperStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author lilimin
  * @since 2021-06-03
  */
-@Controller
+@RestController
 public class StudentController {
 
     @RpcReference
