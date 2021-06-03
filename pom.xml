@@ -19,6 +19,9 @@
     <module>example-client</module>
     <module>example-server</module>
     <module>example-api</module>
+    <module>rpc-spring-boot-starter</module>
+    <module>spring-client</module>
+    <module>spring-server</module>
   </modules>
 
   <parent>
@@ -50,6 +53,21 @@
         <version>${project.version}</version>
       </dependency>
       <dependency>
+        <groupId>com.javashitang</groupId>
+        <artifactId>rpc-spring-boot-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.javashitang</groupId>
+        <artifactId>spring-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.javashitang</groupId>
+        <artifactId>spring-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
         <version>1.16.18</version>
@@ -63,7 +81,7 @@
       <dependency>
         <groupId>com.javashitang</groupId>
         <artifactId>common-tool</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
       </dependency>
       <dependency>
         <groupId>com.esotericsoftware</groupId>
