@@ -16,17 +16,19 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lilimin
  * @since 2020-09-15
  */
+@Slf4j
 public class NettyServer {
 
     public static final int port = PropertiesUtil.getInteger("server.port", 8080);
 
     public void start() {
-
+        log.info("nettyServer start");
         Serializer serializer = new KryoSerializer();
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();

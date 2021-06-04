@@ -1,6 +1,6 @@
 package com.javashitang.autoconfigure;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -8,11 +8,6 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-06-03
  */
 @Configuration
+@ComponentScan("com.javashitang.autoconfigure")
 public class RpcAutoConfiguration {
-
-    @Bean
-    public RpcBeanPostProcessor rpcBeanPostProcessor() {
-        RpcBeanPostProcessor rpcBeanPostProcessor = new RpcBeanPostProcessor();
-        return rpcBeanPostProcessor;
-    }
 }

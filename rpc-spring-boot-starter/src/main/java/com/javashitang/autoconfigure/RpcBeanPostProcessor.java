@@ -6,12 +6,15 @@ import com.javashitang.proxy.ConsumerProxy;
 import com.javashitang.service.ServiceMap;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.stereotype.Component;
+
 import java.lang.reflect.Field;
 
 /**
  * @author lilimin
  * @since 2021-06-03
  */
+@Component
 public class RpcBeanPostProcessor implements BeanPostProcessor {
 
     @Override
