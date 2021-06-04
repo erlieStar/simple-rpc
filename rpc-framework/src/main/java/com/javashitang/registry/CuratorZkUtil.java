@@ -78,6 +78,9 @@ public class CuratorZkUtil {
         }
         List<String> result = null;
         try {
+            if (zkClient.checkExists().forPath(path) == null) {
+                return result;
+            }
             result = zkClient.getChildren().forPath(path);
             registryWatcher(zkClient, path);
         } catch (Exception e) {

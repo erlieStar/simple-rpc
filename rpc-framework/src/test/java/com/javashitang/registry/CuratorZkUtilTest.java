@@ -11,6 +11,8 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -33,7 +35,18 @@ public class CuratorZkUtilTest {
         client.start();
     }
 
+    @Test
+    public void getChildrenNodes() {
+        String path = "/simple-rpc/aaa";
+        System.out.println(CuratorZkUtil.getChildrenNodes(client, path));
+    }
 
+    @Test
+    public void getChildrenNodesTestCase2() {
+        String path = "/simple-rpc/com.javashitang.StudentService";
+        List<String> childrenNodes = CuratorZkUtil.getChildrenNodes(client, path);
+        System.out.println(childrenNodes);
+    }
 
     @Test
     public void testEvent() throws Exception {
