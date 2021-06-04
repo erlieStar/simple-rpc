@@ -97,6 +97,7 @@ public class CuratorZkUtil {
         PathChildrenCache cache = new PathChildrenCache(zkClient, path, true);
         PathChildrenCacheListener listener = ((CuratorFramework client, PathChildrenCacheEvent event) -> {
             String changePath = event.getData().getPath();
+            changePath = changePath.substring(changePath.lastIndexOf("/") + 1);
             switch (event.getType()) {
                 case CHILD_ADDED:
                 case CHILD_UPDATED:

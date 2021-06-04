@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.javashitang.exception.RpcException;
 import com.javashitang.remoting.transport.NettyClient;
 import io.netty.channel.Channel;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.Map;
  * @author lilimin
  * @since 2020-09-22
  */
+@Slf4j
 public class ChannelMap {
 
     private static final NettyClient nettyClient = new NettyClient();
@@ -19,6 +21,7 @@ public class ChannelMap {
     private static final Map<String, Channel> channelMap = Maps.newHashMap();
 
     public static Channel getChannel(InetSocketAddress address) {
+        log.info("address: {}", address);
         String key = address.toString();
         if (channelMap.containsKey(key)) {
             Channel channel = channelMap.get(key);
