@@ -28,7 +28,9 @@ public class RpcBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
                 AnnotationMetadata metadata = ((AnnotatedBeanDefinition) beanDefinition).getMetadata();
                 if (metadata.isAnnotated(RpcService.class.getName())) {
                     NettyServer nettyServer = new NettyServer();
-                    nettyServer.start();
+                    new Thread(() -> {
+                        nettyServer.start();
+                    }).start();
                     break;
                 }
             }
