@@ -1,6 +1,7 @@
 package com.javashitang.service;
 
 import com.google.common.collect.Maps;
+import com.javashitang.exception.RpcException;
 import com.javashitang.remoting.transport.NettyClient;
 import io.netty.channel.Channel;
 
@@ -21,13 +22,18 @@ public class ChannelMap {
         String key = address.toString();
         if (channelMap.containsKey(key)) {
             Channel channel = channelMap.get(key);
-            return channel;
+            if (channel != null && channel.isActive()) {
+                return channel;
+            } else {
+                channelMap.remove(key);
+            }
         }
         Channel channel = nettyClient.connect(address);
+        if (channel != null && channel.isActive()) {
+            channelMap.put(key, channel);
+        } else {
+            throw new RpcException(RpcException.NETWORK_EXCEPTION, "channel is not active");
+        }
         return channel;
-    }
-
-    public static void removeChannel(InetSocketAddress address) {
-        channelMap.remove(address.toString());
     }
 }

@@ -1,6 +1,5 @@
 package com.javashitang.remoting.transport;
 
-import com.javashitang.exception.RpcException;
 import com.javashitang.registry.RegistryService;
 import com.javashitang.remoting.exchange.ResponseFutureMap;
 import com.javashitang.remoting.exchange.RpcRequest;
@@ -28,9 +27,6 @@ public class NettyTransport implements Transporter {
         String serviceName = request.getInterfaceName();
         InetSocketAddress address = registryService.lookup(serviceName);
         Channel channel = ChannelMap.getChannel(address);
-        if (channel == null || !channel.isActive()) {
-            throw new RpcException(RpcException.NETWORK_EXCEPTION, "channel is not active");
-        }
         CompletableFuture<RpcResponse> requestFuture = new CompletableFuture();
         ResponseFutureMap.put(request.getRequestId(), requestFuture);
         channel.writeAndFlush(request).addListener((ChannelFutureListener) future -> {
