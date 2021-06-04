@@ -19,14 +19,14 @@ public class RpcBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        RpcService rpcService = bean.getClass().getAnnotation(RpcService.class);
+        Class<?> targetClass = bean.getClass();
+        RpcService rpcService = targetClass.getAnnotation(RpcService.class);
         if (rpcService != null) {
             ServiceMap.registryService(this.getServiceKey(bean), bean);
         }
-        Class<?> targetClass = bean.getClass();
         Field[] declaredFields = targetClass.getDeclaredFields();
         for (Field declaredField : declaredFields) {
-            RpcReference rpcReference = bean.getClass().getAnnotation(RpcReference.class);
+            RpcReference rpcReference = declaredField.getAnnotation(RpcReference.class);
             if (rpcReference != null) {
                 Object proxy = ConsumerProxy.getProxy(declaredField.getType());
                 declaredField.setAccessible(true);
