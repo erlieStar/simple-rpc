@@ -18,6 +18,7 @@ public class ChannelMap {
 
     private static final NettyClient nettyClient = new NettyClient();
 
+    // 服务地址 -> 对应的网络连接
     private static final Map<String, Channel> channelMap = Maps.newHashMap();
 
     public static Channel getChannel(InetSocketAddress address) {

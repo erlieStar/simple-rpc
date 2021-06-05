@@ -2,8 +2,8 @@ package com.javashitang.service;
 
 import com.google.common.collect.Maps;
 import com.javashitang.registry.RegistryService;
-import com.javashitang.registry.ZookeeperRegistryService;
 import com.javashitang.remoting.transport.NettyServer;
+import com.javashitang.util.SpiUtil;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class ServiceMap {
 
     private static Map<String, Object> serviceMap = Maps.newHashMap();
-    private static final RegistryService registryService = new ZookeeperRegistryService();
+    private static final RegistryService registryService = SpiUtil.load(RegistryService.class);
 
     public static void registryService(String serviceKey, Object object) {
         try {
