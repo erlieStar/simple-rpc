@@ -1,6 +1,8 @@
 package com.javashitang.service;
 
 
+import com.javashitang.api.HelloService;
+
 public class HelloServiceImpl implements HelloService {
 
     @Override

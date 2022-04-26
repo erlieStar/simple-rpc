@@ -1,10 +1,8 @@
-package com.javashitang.main;
+package com.javashitang;
 
-import com.javashitang.invoke.RequestHandler;
-import com.javashitang.invoke.ServiceMap;
-import com.javashitang.service.HelloService;
+import com.javashitang.api.HelloService;
+import com.javashitang.api.UpperCaseService;
 import com.javashitang.service.HelloServiceImpl;
-import com.javashitang.service.UpperCaseService;
 import com.javashitang.service.UpperCaseServiceImpl;
 
 import java.net.ServerSocket;

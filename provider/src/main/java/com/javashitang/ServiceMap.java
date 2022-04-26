@@ -1,4 +1,4 @@
-package com.javashitang.invoke;
+package com.javashitang;
 
 import java.util.HashMap;
 import java.util.Map;

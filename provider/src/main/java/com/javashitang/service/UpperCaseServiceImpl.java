@@ -1,9 +1,7 @@
 package com.javashitang.service;
 
-/**
- * @author lilimin
- * @since 2020-10-10
- */
+import com.javashitang.api.UpperCaseService;
+
 public class UpperCaseServiceImpl implements UpperCaseService {
 
     @Override

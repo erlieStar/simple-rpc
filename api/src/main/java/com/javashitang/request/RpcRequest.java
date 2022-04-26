@@ -1,4 +1,4 @@
-package com.javashitang.invoke;
+package com.javashitang.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,10 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-/**
- * @author lilimin
- * @since 2020-10-09
- */
 @Data
 @Builder
 @NoArgsConstructor

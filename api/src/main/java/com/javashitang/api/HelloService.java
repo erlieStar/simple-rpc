@@ -1,4 +1,4 @@
-package com.javashitang.service;
+package com.javashitang.api;
 
 public interface HelloService {
 
